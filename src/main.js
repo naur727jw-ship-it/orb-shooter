@@ -13,7 +13,6 @@ const GRAVITY = 30;
 const STEPS_PER_FRAME = 5;
 const JUMP_FORCE = 15;
 const MOVE_SPEED = 8;
-const SPRINT_SPEED = 18;
 const BULLET_RADIUS = 0.4;
 const BULLET_SPEED = 30;
 const FIRE_RATE_MS = 150;
@@ -584,9 +583,7 @@ function getSideVector() {
 }
 
 function controls(deltaTime) {
-    const isSprinting = keyStates['ShiftLeft'] || keyStates['ShiftRight'];
-    const speedMult = isSprinting ? SPRINT_SPEED : MOVE_SPEED;
-    const speedDelta = deltaTime * (playerOnFloor ? speedMult * 3 : speedMult);
+    const speedDelta = deltaTime * (playerOnFloor ? MOVE_SPEED * 3 : MOVE_SPEED);
 
     if (keyStates['KeyW']) playerVelocity.add(getForwardVector().multiplyScalar(speedDelta));
     if (keyStates['KeyS']) playerVelocity.add(getForwardVector().multiplyScalar(-speedDelta));
